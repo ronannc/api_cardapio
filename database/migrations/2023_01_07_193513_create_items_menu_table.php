@@ -16,6 +16,8 @@ return new class extends Migration {
             $table->id();
             $table->unsignedBigInteger( 'menu_id' );
             $table->foreign( 'menu_id' )->references( 'id' )->on( 'menu' );
+            $table->unsignedBigInteger( 'category_item_menu_id' );
+            $table->foreign( 'category_item_menu_id' )->references( 'id' )->on( 'category_item_menu' );
             $table->string( 'name' );
             $table->string( 'description' )->nullable();
             $table->double( 'value' );

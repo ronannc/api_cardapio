@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Group extends Model
+class CategoryItemMenu extends Model
 {
     use HasFactory;
-    protected $table    = 'group';
+    
+    protected $table    = 'category_item_menu';
     protected $fillable = [
-        'name',
-        'description'
+        'name'
     ];
 }

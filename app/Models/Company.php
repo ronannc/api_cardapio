@@ -9,9 +9,20 @@ class Company extends Model
 {
     use HasFactory;
     
+    protected $table    = 'company';
     protected $fillable = [
         'name',
         'description',
         'group_id'
     ];
+    
+    public function group()
+    {
+        return $this->belongsTo( Group::class );
+    }
+    
+    public function menu()
+    {
+        return $this->hasMany( Menu::class );
+    }
 }
