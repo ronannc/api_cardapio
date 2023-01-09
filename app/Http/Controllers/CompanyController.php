@@ -15,7 +15,7 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        //
+        return Company::select('id', 'name', 'description')->simplePaginate();
     }
     
     /**
