@@ -18,9 +18,12 @@ class CompanyFactory extends Factory
     public function definition()
     {
         return [
-            'name'        => $this->faker->name,
-            'description' => $this->faker->text( 50 ),
-            'group_id'    => Group::all()->random()->id
+            'name'         => $this->faker->name,
+            'description'  => $this->faker->text( 50 ),
+            'group_id'     => Group::all()->random()->id,
+            'url_logo'     => $this->faker->imageUrl,
+            'star_hours'   => $this->faker->time( '06:00', '08:00' ),
+            'finish_hours' => $this->faker->time( '17:00', '19:00' ),
         ];
     }
 }

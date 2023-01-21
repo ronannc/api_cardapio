@@ -18,6 +18,9 @@ return new class extends Migration {
             $table->foreign( 'group_id' )->references( 'id' )->on( 'group' );
             $table->string( 'name' );
             $table->string( 'description' )->nullable();
+            $table->string( 'url_logo' )->nullable();
+            $table->time( 'star_hours' );
+            $table->time( 'finish_hours' );
             $table->timestamps();
         } );
     }

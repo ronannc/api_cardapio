@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCompanyRequest;
 use App\Http\Requests\UpdateCompanyRequest;
 use App\Models\Company;
+use Illuminate\Http\Request;
 
 class CompanyController extends Controller
 {
@@ -13,9 +14,16 @@ class CompanyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index( Request $request )
     {
-        return Company::select('id', 'name', 'description')->simplePaginate();
+        $data = $request->all();
+        
+        return Company::select( 'id', 'name', 'description' )->where( function ( $q ) use ( $data ) {
+            if ( isset( $data[ 'search' ] ) and $data[ 'search' ] ) {
+                $q->where( 'name', 'like', '%' . $data[ 'name' ] . '%' )
+                    ->where( 'description', 'like', '%' . $data[ 'description' ] . '%' );
+            }
+        } )->simplePaginate();
     }
     
     /**
