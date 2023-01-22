@@ -10,8 +10,12 @@ class ItemsMenu extends Model
     use HasFactory;
     
     protected $table    = 'items_menu';
+    protected $hidden   = [
+        'created_at',
+        'updated_at'
+    ];
     protected $fillable = [
-        'menu_id',
+        'company_id',
         'category_item_menu_id',
         'name',
         'description',
@@ -19,12 +23,7 @@ class ItemsMenu extends Model
         'url_image'
     ];
     
-    public function menu()
-    {
-        return $this->belongsTo( Menu::class );
-    }
-    
-    public function categoryItemMenu()
+    public function category_item_menu()
     {
         return $this->belongsTo( CategoryItemMenu::class );
     }

@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\CategoryItemMenu;
-use App\Models\Menu;
+use App\Models\Company;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,7 +19,7 @@ class ItemsMenuFactory extends Factory
     public function definition()
     {
         return [
-            'menu_id'               => Menu::all()->random()->id,
+            'company_id'            => Company::all()->random()->id,
             'category_item_menu_id' => CategoryItemMenu::all()->random()->id,
             'name'                  => $this->faker->name,
             'description'           => $this->faker->text( 50 ),

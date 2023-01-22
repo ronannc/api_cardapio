@@ -15,6 +15,8 @@ return new class extends Migration {
         Schema::create( 'category_item_menu', function ( Blueprint $table ) {
             $table->id();
             $table->string( 'name' );
+            $table->unsignedBigInteger( 'company_id' );
+            $table->foreign( 'company_id' )->references( 'id' )->on( 'company' );
             $table->timestamps();
         } );
     }

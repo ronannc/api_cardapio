@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Company;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,8 @@ class CategoryItemMenuFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name,
+            'name'       => $this->faker->name,
+            'company_id' => Company::all()->random()->id,
         ];
     }
 }

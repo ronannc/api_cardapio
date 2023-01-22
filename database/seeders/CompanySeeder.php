@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\CategoryItemMenu;
 use App\Models\Company;
 use App\Models\ItemsMenu;
-use App\Models\Menu;
 use Illuminate\Database\Seeder;
 
 class CompanySeeder extends Seeder
@@ -16,14 +16,23 @@ class CompanySeeder extends Seeder
      */
     public function run()
     {
-        Company::factory()
+        $companies = Company::factory()
             ->count( 50 )
-            ->has(
-                Menu::factory()->count( 1 )->has(
-                    ItemsMenu::factory()->count( random_int( 20, 50 ) ),
-                    'itemsMenu'
-                )
-            )
             ->create();
+        foreach ( $companies as $company ) {
+            $categoriesItemMenu = CategoryItemMenu::factory()
+                ->count( 5 )
+                ->create( [
+                              'company_id' => $company->id,
+                          ] );
+            foreach ( $categoriesItemMenu as $category ) {
+                ItemsMenu::factory()
+                    ->count( 30 )
+                    ->create( [
+                                  'company_id'            => $company->id,
+                                  'category_item_menu_id' => $category->id,
+                              ] );
+            }
+        }
     }
 }

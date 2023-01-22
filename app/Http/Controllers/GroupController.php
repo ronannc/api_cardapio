@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreGroupRequest;
 use App\Http\Requests\UpdateGroupRequest;
 use App\Models\Group;
+use Illuminate\Http\Request;
 
 class GroupController extends Controller
 {
@@ -13,9 +14,16 @@ class GroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index( Request $request )
     {
-        //
+        $data = $request->all();
+        
+        return Group::where( function ( $q ) use ( $data ) {
+            if ( isset( $data[ 'search' ] ) and $data[ 'search' ] ) {
+                $q->where( 'name', 'ilike', '%' . $data[ 'search' ] . '%' )
+                    ->orWhere( 'description', 'ilike', '%' . $data[ 'search' ] . '%' );
+            }
+        } )->simplePaginate();
     }
     
     /**

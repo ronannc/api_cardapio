@@ -14,8 +14,8 @@ return new class extends Migration {
     {
         Schema::create( 'items_menu', function ( Blueprint $table ) {
             $table->id();
-            $table->unsignedBigInteger( 'menu_id' );
-            $table->foreign( 'menu_id' )->references( 'id' )->on( 'menu' );
+            $table->unsignedBigInteger( 'company_id' );
+            $table->foreign( 'company_id' )->references( 'id' )->on( 'company' );
             $table->unsignedBigInteger( 'category_item_menu_id' );
             $table->foreign( 'category_item_menu_id' )->references( 'id' )->on( 'category_item_menu' );
             $table->string( 'name' );

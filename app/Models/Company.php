@@ -10,10 +10,18 @@ class Company extends Model
     use HasFactory;
     
     protected $table    = 'company';
+    protected $hidden   = [
+        'created_at',
+        'updated_at'
+    ];
     protected $fillable = [
         'name',
         'description',
-        'group_id'
+        'group_id',
+        'primary_color',
+        'url_logo',
+        'star_hours',
+        'finish_hours'
     ];
     
     public function group()
@@ -21,8 +29,13 @@ class Company extends Model
         return $this->belongsTo( Group::class );
     }
     
-    public function menu()
+    public function items_menu()
     {
-        return $this->hasMany( Menu::class );
+        return $this->hasMany( ItemsMenu::class );
+    }
+    
+    public function categories_items_menu()
+    {
+        return $this->hasMany( CategoryItemMenu::class, );
     }
 }

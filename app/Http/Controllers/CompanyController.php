@@ -18,12 +18,22 @@ class CompanyController extends Controller
     {
         $data = $request->all();
         
-        return Company::select( 'id', 'name', 'description' )->where( function ( $q ) use ( $data ) {
+        return Company::where( function ( $q ) use ( $data ) {
             if ( isset( $data[ 'search' ] ) and $data[ 'search' ] ) {
-                $q->where( 'name', 'like', '%' . $data[ 'name' ] . '%' )
-                    ->where( 'description', 'like', '%' . $data[ 'description' ] . '%' );
+                $q->where( 'name', 'ilike', '%' . $data[ 'search' ] . '%' )
+                    ->orWhere( 'description', 'ilike', '%' . $data[ 'search' ] . '%' );
+            }
+            if ( isset( $data[ 'group_id' ] ) and $data[ 'group_id' ] ) {
+                $q->where( 'group_id', $data[ 'group_id' ] );
             }
         } )->simplePaginate();
+    }
+    
+    public function itemsMenu( $id )
+    {
+        $company = Company::with( 'categories_items_menu.items_menu' )->find( $id );
+        
+        return $company->categories_items_menu;
     }
     
     /**
