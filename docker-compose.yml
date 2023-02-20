@@ -17,16 +17,16 @@ services:
             - api-cardapio
 
     db:
-        image: mysql:8.0
+        image: postgres:latest
         container_name: api-cardapio-db
         restart: unless-stopped
         environment:
-            MYSQL_DATABASE: api-cardapio
-            MYSQL_ROOT_PASSWORD: root
-            SERVICE_TAGS: dev
-            SERVICE_NAME: mysql
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
         volumes:
-            - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+            - ./docker-compose/postgres:/docker-entrypoint-initdb.d
+        ports:
+            - "5432:5432"
         networks:
             - api-cardapio
 
