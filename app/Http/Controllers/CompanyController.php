@@ -33,7 +33,7 @@ class CompanyController extends Controller
     {
         $company = Company::with( 'categories_items_menu.items_menu' )->find( $id );
         
-        return $company->categories_items_menu;
+        return [ 'data' => $company->categories_items_menu ];
     }
     
     /**
@@ -61,13 +61,11 @@ class CompanyController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Models\Company $company
-     *
      * @return \Illuminate\Http\Response
      */
-    public function show( Company $company )
+    public function show( $id )
     {
-        //
+        return response( Company::find( $id ) );
     }
     
     /**

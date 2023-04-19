@@ -17,5 +17,6 @@ Route::middleware( 'auth:sanctum' )->get( '/user', function ( Request $request )
     return $request->user();
 } );
 Route::get( 'companies', [ \App\Http\Controllers\CompanyController::class, 'index' ] );
+Route::get( 'company/{id}', [ \App\Http\Controllers\CompanyController::class, 'show' ] );
 Route::get( 'groups', [ \App\Http\Controllers\GroupController::class, 'index' ] );
 Route::get( 'company/{id}/items-menu', [ \App\Http\Controllers\CompanyController::class, 'itemsMenu' ] );
